@@ -4,6 +4,7 @@ import connectDB from "./utils/db.js";
 import cloudinary from "cloudinary";
 import cors from "cors";
 import dns from "dns";
+import axios from "axios";
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 dotenv.config();
@@ -14,6 +15,23 @@ cloudinary.v2.config({
 });
 
 const app = express();
+
+const url = `https://cartify-ecommerce-website-v9wx.onrender.com`;
+const interval = 30000;
+
+function reloadWebsite() {
+	axios
+		.get(url)
+		.then((response) => {
+			console.log("website reloded");
+		})
+		.catch((error) => {
+			console.error(`Error : ${error.message}`);
+		});
+}
+
+setInterval(reloadWebsite, interval);
+
 const port = process.env.PORT;
 app.use(cors());
 
