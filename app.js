@@ -17,7 +17,14 @@ const app = express();
 
 const port = process.env.PORT;
 app.use(cors());
-app.use(cors({ origin: "https://cartify-ecommerce-kappa.vercel.app" }));
+app.use(
+	cors({
+		origin: process.env.Frontend_URL,
+		credentials: true,
+		methods: ["GET", "POST", "PUT", "DELETE"],
+		allowedHeaders: ["Content-Type", "Authorization"],
+	}),
+);
 
 // Routes
 import UserRouter from "./routes/UserRouter.js";
