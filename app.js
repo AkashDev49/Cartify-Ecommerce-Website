@@ -13,10 +13,15 @@ cloudinary.v2.config({
 	api_secret: process.env.CLOUD_API_SECERT_KEY,
 });
 
+app.use(cors());
 const app = express();
+app.use(cors({
+  origin: 'https://cartify-ecommerce-kappa.vercel.app', // exact Vercel URL
+  credentials: true  // agar cookies/auth use kar rahe ho
+}));
+
 
 const port = process.env.PORT ;
-app.use(cors());
 
 // Routes
 import UserRouter from "./routes/UserRouter.js";
